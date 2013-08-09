@@ -1,0 +1,11 @@
+set completion-ignore-case on
+set completion-prefix-display-length 2
+set show-all-if-unmodified on
+set visible-stats on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+"\e[1;3A": "cd ..\C-m"
+
+"\es": "vim $(ls *.spec*)\C-m"
