@@ -48,3 +48,7 @@ set expandtab
 set softtabstop=4
 
 "autocmd BufReadPost *.spec "/%changelogmcgg"
+
+function GitBlameCurrentLine()
+      echo system('git blame -L'.line(".").','.line(".").' '.@%)
+endfunction
