@@ -6,7 +6,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
-Bundle 'ivanov/vim-ipython'
 Bundle 'altercation/vim-colors-solarized'
 """"
 
@@ -29,11 +28,11 @@ set showmatch
 set smartcase
 
 set undofile
-set undodir=/home/mstuchli/.vim/undodir/
+set undodir=~/.vim/undodir/
 
 set scrolloff=3
 
-set backupdir=/home/mstuchli/.vim/backup/
+set backupdir=~/.vim/backup/
 
 set gdefault
 
