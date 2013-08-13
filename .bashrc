@@ -3,6 +3,7 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# https://github.com/rupa/z
 . ~/git/z/z.sh
 
 function cd {
@@ -17,13 +18,16 @@ function new {
     urxvt -e /bin/sh -c "cd `pwd` && /bin/bash" &
 }
 
+# cd to directories just by typing their name
 shopt -s autocd
+# correct spelling mistakes
 shopt -s cdspell
 shopt -s dirspell
 
 HISTSIZE=100000
 HISTFILESIZE=100000
 
+# use vi bindings
 set -o vi
 alias :q=exit
 alias :wq=exit
