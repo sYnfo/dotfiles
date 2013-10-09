@@ -35,7 +35,12 @@ alias :wq=exit
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
-export PS1='[\u : \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
+
+# makes interactive text after prompt bold, which makes it easier to see
+# where the output of a command ends and where the prompt begins when looking
+# for something
+trap 'tput sgr0' DEBUG
+export PS1='[\u : \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ \[$(tput bold)\]'
 
 #solarized colors for tty
 export CLICOLORS=1
