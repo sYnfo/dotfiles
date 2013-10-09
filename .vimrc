@@ -16,6 +16,9 @@ colorscheme solarized
 nmap j gj
 nmap k gk
 
+map <Left> :tabp<CR>
+map <Right> :tabn<CR>
+
 filetype on
 filetype plugin on
 filetype indent on
