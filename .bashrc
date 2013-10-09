@@ -85,6 +85,6 @@ if [ "$TERM" = "linux" ]; then
     #this is an attempt at working utf8 line drawing chars in the linux-console
     #export TERM=linux+utf8
     clear #hmm, yeah we need this or else we get funky background collisions
-fi
 
-setfont /lib/kbd/consolefonts/ter-u18b.psf.gz
+    setfont /lib/kbd/consolefonts/ter-u18b.psf.gz
+fi
