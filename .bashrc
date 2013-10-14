@@ -40,7 +40,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 # where the output of a command ends and where the prompt begins when looking
 # for something
 trap 'tput sgr0' DEBUG
-export PS1='[\u : \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ \[$(tput bold)\]'
+export PS1='$(tput sgr0)[\u : \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ \[$(tput bold)\]'
 
 #solarized colors for tty
 export CLICOLORS=1
