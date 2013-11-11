@@ -32,6 +32,8 @@ set -o vi
 alias :q=exit
 alias :wq=exit
 
+alias la="ls -a"
+
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
