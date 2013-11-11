@@ -41,8 +41,8 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 # makes interactive text after prompt bold, which makes it easier to see
 # where the output of a command ends and where the prompt begins when looking
 # for something
-trap 'tput sgr0' DEBUG
-export PS1='$(tput sgr0)[\u : \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ \[$(tput bold)\]'
+#trap 'tput sgr0' DEBUG
+export PS1='[\u : \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
 
 #solarized colors for tty
 export CLICOLORS=1
