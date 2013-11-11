@@ -1,0 +1,12 @@
+[user]
+	email = mstuchli@redhat.com
+[color]
+	ui = true
+[core]
+	trustctime = false
+[alias]
+	ci = commit
+	co = checkout
+	ca = commit -a
+    ls = log -5 --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log -5 --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
