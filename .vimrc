@@ -7,6 +7,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'wellle/targets.vim'
 """"
 
 set background=dark
@@ -16,8 +17,8 @@ colorscheme solarized
 nmap j gj
 nmap k gk
 
-map <Left> :tabp<CR>
-map <Right> :tabn<CR>
+map <Left> :p<CR>
+map <Right> :n<CR>
 
 filetype on
 filetype plugin on
@@ -29,6 +30,7 @@ set incsearch
 set relativenumber
 set showmatch
 set smartcase
+set wildmenu
 
 set undofile
 set undodir=~/.vim/undodir/
@@ -49,8 +51,6 @@ set shiftwidth=4
 set expandtab
 set softtabstop=4
 
-"autocmd BufReadPost *.spec "/%changelogmcgg"
+set laststatus=2
 
-function GitBlameCurrentLine()
-      echo system('git blame -L'.line(".").','.line(".").' '.@%)
-endfunction
+iabbrev ipdb import ipdb; ipdb.set_trace()
