@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-. /home/mstuchli/git/z/z.sh
+. /usr/local/etc/profile.d/z.sh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -11,6 +11,7 @@ ZSH_THEME="blinks"
 
 alias :q=exit
 alias :wq=exit
+alias vim=nvim
 
 function hgrep {
 history | grep $@
@@ -60,10 +61,12 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git, dockeri, dirhistory)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.cargo/env
+export PATH=/$HOME/.cargo/bin:$PATH
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/$HOME/.local/bin:$PATH
+export PATH=/usr/local/sbin:$HOME/bin:/usr/local/bin:/$HOME/.local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -81,3 +84,13 @@ export PATH=$HOME/bin:/usr/local/bin:/$HOME/.local/bin:$PATH
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/matt/Downloads/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/matt/Downloads/google-cloud-sdk/completion.zsh.inc'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+function mosh () {/usr/local/bin/mosh "$@" -- tmux a;}

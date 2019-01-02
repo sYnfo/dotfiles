@@ -1,17 +1,43 @@
 [user]
-    email = mstuchli@gmail.com
-[branch]
-    autosetuprebase = always
+    name = Matej Stuchlik
+    email = matej.stuchlik@gmail.com
 [color]
     ui = true
 [core]
     trustctime = false
     editor = vim
 [alias]
-    ci = commit
+    st = status
+    ci = commit --verbose
     co = checkout
     ca = commit -a
-    ls = log -5 --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log -5 --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    di = diff
+    dc = diff --cached
+    amend = commit --amend
+    aa = add --all
+    ff = merge --ff-only
+    pullff = pull --ff-only
+    fa = fetch --all
+    pom = push origin master
+    b = branch
+
+	# Goodness (summary of diff lines added/removed/total)
+    gn = goodness
+    gnc = goodness --cached
+
+	# Fancy logging.
+    #   h = head
+    #   hp = head with patch
+    #   r = recent commits, only current branch
+    #   ra = recent commits, all reachable refs
+    #   l = all commits, only current branch
+    #   la = all commits, all reachable refs
+    head = !git r -1
+    h = !git head
+    hp = "!. ~/.githelpers && show_git_head"
+    r = !GIT_NO_PAGER=1 git l -20
+    ra = !git r --all
+    l = "!. ~/.githelpers && pretty_git_log"
+    la = !git l --all
 [push]
     default = simple
