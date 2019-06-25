@@ -1,20 +1,24 @@
 set nocompatible
 
-""""VUNDLE SETUP""""
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'wellle/targets.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'janko-m/vim-test'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'w0rp/ale'
-call vundle#end()
-filetype plugin indent on
-""""
+" Install vim-plug unless it's already installed
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    execute '!curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+" Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'wellle/targets.vim'
+Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/vim-grammarous', { 'for': 'text' }
+Plug 'w0rp/ale', { 'for': 'python' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+call plug#end()
+
+" Turn spellcheck on for text files
+autocmd FileType text setlocal spell
 
 set background=dark
 colorscheme solarized
@@ -30,6 +34,8 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" show whitespace
+set list
 set backspace=indent,eol,start
 set showtabline=2
 set autoindent
@@ -40,7 +46,7 @@ set showmatch
 set smartcase
 set wildmenu
 syntax on
-set winwidth=79
+set winwidth=80
 
 set undofile
 set undodir=~/.vim/undodir/
@@ -54,8 +60,6 @@ set gdefault
 set guioptions-=m
 set guioptions-=T
 
-cmap w!! %!sudo tee > /dev/null %
-
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -63,33 +67,54 @@ set softtabstop=4
 
 set laststatus=2
 
+" Highlight current line
+set cursorline
+
+" Fix slow O inserts
+:set timeout timeoutlen=1000 ttimeoutlen=100
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Turn backup off
+set nobackup
+set nowb
+set noswapfile
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ Line:\ %l\ \ Column:\ %c
+
+
 iabbrev ipdb import ipdb; ipdb.set_trace()
+
+cmap w!! %!sudo tee > /dev/null %
 
 " Allows you to easily replace the current word and all its occurrences.
 nnoremap <Leader>rc :%s/\<<C-r><C-w>\>/
 vnoremap <Leader>rc y:%s/<C-r>"/
 
 nnoremap <CR> :nohlsearch<cr>
-" Highlight current line
-set cursorline
 " Move around splits with <c-jkhl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-" Fix slow O inserts
-:set timeout timeoutlen=1000 ttimeoutlen=100
 
-" Syntastic status line
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Set the default CtrlP search mode to mixed, so that it searched in
+" buffer, files and MRU cache at the same it
+let g:ctrlp_cmd = 'CtrlPMixed'
 
-let g:syntastic_mode_map = {
-    \ "mode": "passive" }
+" Use fd for ctrlp.
+let g:ctrlp_user_command = 'fd --type f --color never "" %s'
 
-nnoremap <Leader>s :SyntasticCheck<CR>
-
+" Disable caching, since fd is so fast anyway
+let g:ctrlp_use_caching = 0
 
 " Jump to last cursor position unless it's invalid or in an event handler
 autocmd BufReadPost *
@@ -109,21 +134,7 @@ endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
 
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-" Delete trailing white space on save, useful for some filetypes ;)
+" Delete trailing white space on save, useful for some filetypes
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
@@ -132,9 +143,7 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-if has("autocmd")
-    autocmd BufWritePre *.go,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-endif
+autocmd BufWritePre *.go,*.py,*.sh :call CleanExtraSpaces()
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -149,10 +158,3 @@ function! HasPaste()
     endif
     return ''
 endfunction
-
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
-
-let test#strategy = "neovim"
-let test#python#runner = 'nose'
-nnoremap <Leader>t :w<CR> :TestFile<CR>
