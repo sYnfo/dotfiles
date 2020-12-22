@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/Users/synfo/go/src/git.corp.stripe.com/stripe-internal/gocode/loadbot-srv'
+let g:netrw_dirhist_0='/Users/synfo/stripe/puppet-config/terraform/stripe.io/signalfx/bapi-srv/dashboards/overview'
+let g:netrw_dirhist_9='/Users/synfo/stripe/puppet-config/terraform/stripe.io/signalfx/bapi-srv/dashboards'
+let g:netrw_dirhist_8='/Users/synfo/github/dotfiles/nvim/autoload/test/go'
+let g:netrw_dirhist_7='/Users/synfo/github/dotfiles/nvim/autoload/test/go/bazel.vim'
+let g:netrw_dirhist_6='/Users/synfo/github/dotfiles/nvim/layers/navigation'
+let g:netrw_dirhist_5='/Users/synfo/github/dotfiles/nvim/layers'
+let g:netrw_dirhist_4='/Users/synfo/github/dotfiles/nvim/layers/vim'
+let g:netrw_dirhist_3='/Users/synfo/github/dotfiles/nvim'
+let g:netrw_dirhist_2='/Users/synfo/github/dotfiles/nvim/layers'
